@@ -1,0 +1,59 @@
+
+.title{
+    color: white;
+    font-family: 'DynaPuff', cursive;
+    font-weight: bolder;
+    font-size: 60px;
+    margin-left: 560px;
+    border-color: indianred;
+    border-width: 5px;
+    text-decoration:underline indianred;
+ }
+ .text{
+     height: 40px;
+     width:250px;
+     border-radius: 20px;
+     border:none;
+     margin-top: 50px;
+     margin-left: 30px;
+     font-family:Nunito ;
+     font-size: 20px;
+     padding-left: 20px;
+     color:indianred;
+     font-weight: bold;
+ }
+ .text:hover{
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+ }
+ .text:active{
+    border:none;
+ }
+ .add{
+    margin-left: 20px;
+    margin-top: 50px;
+    vertical-align:top;
+    height: 40px;
+    border-radius:30px;
+    padding:15px;
+    border:none;
+    font-family: Nunito;
+    font-weight: bold;
+    color: indianred;
+    background-color: white;
+ }
+ .add:hover{
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+.mdy{
+    height: 40px;
+    border:none;
+    border-radius:10px;
+    padding: 10px;
+    font-family: Nunito;
+    font-weight: bold;
+    color:indianred;
+    margin-left: 480px;
+}
+.mdy:hover{
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}

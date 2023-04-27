@@ -1,0 +1,124 @@
+<html>
+    <link rel="stylesheet" href="styles/todonew.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="todonew.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <head>
+        <title>Janani's ToDoList</title>
+    </head>
+    <body style="
+        background-image: url('coral.avif');
+        background-repeat: no-repeat;
+        background-size: cover;
+    ">
+        <p class="title">My ToDo List</p>
+        <input class="mdy" type="date" id="date_picker">
+        <input id="todo-user" class='text' type="text"/>
+        <button class="add"  onclick="addToDo()">Add Task</button>
+       
+        <div id="todoList"></div>
+    <script>
+        //Model
+        let todoArr;
+        const savedTodos=JSON.parse(localStorage.getItem('todoArr'));
+        if(Array.isArray(savedTodos)){
+            todoArr=savedTodos;
+        }else{
+            todoArr=[{
+             title:'Drink Water',
+             dueDate:'14-04-23',
+             id:'1'
+            },
+            {
+             title:'Skincare',
+             dueDate:'15-04-23',
+             id:'2'
+            },
+            {
+             title:'Workout',
+             dueDate:'16-04-23',
+             id:'3'
+            }];
+        }
+         
+         //Creating Todo
+         function createToDo(title,dueDate){
+            const id=''+new Date().getTime();//gets the current time
+            todoArr.push({
+                title:title,
+                dueDate:dueDate,
+                id:id
+         });
+         saveToDo();
+        }
+         //Delete ToDo
+         function removeToDo(toDelete){
+            todoArr=todoArr.filter(function(todo){
+                if(todo.id===toDelete){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+             });
+             saveToDo();
+         }
+
+
+         function saveToDo(){
+            localStorage.setItem('todoArr',JSON.stringify(todoArr))
+         }
+
+
+
+         //After 'Add' button click
+         function addToDo(){
+            
+            const textbox=document.getElementById('todo-user');
+            const title=textbox.value;
+            const datePicker=document.getElementById('date_picker');
+            const dueDate=datePicker.value;   
+           
+            createToDo(title,dueDate)
+            render();
+         }
+
+         //After Done button is click
+         function deleteToDo(event){
+             const remove=event.target;
+             const toDelete=remove.id;
+             
+            removeToDo(toDelete);
+            render();
+         }
+
+         //renders each todo added to the list and display in web page
+         function render(){
+            document.getElementById('todoList').innerHTML='';
+            
+            todoArr.forEach(function(todo){
+                const element=document.createElement('div');
+                element.innerText=" ✓ "+"  "+todo.title +" "+"☛"+" "+todo.dueDate;
+                const remove=document.createElement('button');
+                remove.innerText='Done';
+                remove.style='margin-left:20px; border:none; font-family:Nunito; color:indianred; font-weight:bold; border-radius:5px;';
+                remove.onclick=deleteToDo;
+                remove.id=todo.id;
+                element.appendChild(remove);
+                const todo_list=document.getElementById('todoList');
+                todo_list.appendChild(element);
+                element.style='color:white; font-family:Nunito; font-weight:bold; font-size:20px;  margin-left:650px; margin-top:25px;'
+        });
+         }
+         
+         
+        render();
+
+      </script>  
+    </body>
+</html>
